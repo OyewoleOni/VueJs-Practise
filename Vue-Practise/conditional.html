@@ -1,0 +1,37 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="app">
+    <p v-if="show">You can see me!</p>
+    <p v-else>Now You see me!</p>
+    <template>
+        <p>Inside a template</p>
+    </template>
+    <p>Do you also see me!</p>
+    <button @click="show = !show">Switch</button>
+
+    <ul>
+        <li v-for="(ingredient, i) in ingredients" :key="ingredient">{{ ingredient }} ({{i}})</li>
+    </ul>
+    <button @click="ingredients.push('spices')">Add New</button>
+    <hr>
+    <ul>
+        <li v-for="(person, i) in persons">
+            <span v-for="(value, key) in person">{{key}}: {{value}}, </span>
+        </li>
+    </ul>
+    <span v-for="n in 10">{{n}}</span>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            show: true,
+            ingredients: ['meat', 'fruits', 'cookies'],
+            persons: [
+                {name: 'Max', age: 27, color: 'red'},
+                {name: 'Anna', age: 'unknown', color: 'blue'}
+            ]
+        }
+    })
+</script>

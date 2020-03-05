@@ -1,0 +1,67 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id='app'>
+    <h1 v-once>{{title}}</h1>
+    <input type="text" v-on:input="changTitle" v-on:keyup.enter.space="alertMe">
+    <p>{{ sayHello() }} - <a v-bind:href="link">Google</a></p>
+    <hr>
+    <p v-html="finishedLink"></p>
+    <button v-on:click="increase(2, $event)">Click me</button>
+    <p>{{ counter }}</p>
+    <p v-on:mousemove="updateCoordinate"
+    >Coordinates: {{x}} / {{y}}
+        - <span v-on:mousemove.stop="">DEAD SPOT</span>
+    </p>
+    <hr>
+    <input type="text" v-model="name">
+    <p>{{name}}</p>
+
+    <hr>
+    <button v-on:click="counter1++">Increase</button>
+    <button v-on:click="counter1--">Decrease</button>
+    <p>Counter: {{counter1}}</p>
+    <p>Result: {{result()}}</p>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            title: 'Hello World!',
+            link: 'http://google.com',
+            finishedLink: '<a href="http://google.com">Google</a>',
+            counter: 0,
+            x: 0,
+            y: 0,
+            name: 'Max',
+            counter1: 0
+        },
+        methods: {
+            changTitle: function(event){
+                this.title = event.target.value;
+            },
+            sayHello: function () {
+
+                this.title = 'Hello!';
+                return this.title;
+            },
+            increase: function (step, event) {
+                this.counter += step;
+            },
+            updateCoordinate: function (event) {
+                this.x = event.clientX;
+                this.y = event.clientY
+            },
+            dummy: function (event) {
+                event.stopPropagation();
+            },
+            alertMe: function () {
+                alert('Alert!');
+            },
+            result() {
+                return this.counter1 > 5 ? 'Greater than 5': 'Smaller than 5'
+            }
+        }
+    })
+</script>
+

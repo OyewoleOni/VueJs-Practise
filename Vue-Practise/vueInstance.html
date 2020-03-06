@@ -1,0 +1,78 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="app1">
+    <h1>{{title}}</h1>
+    <button @click="show">Show Paragraph</button>
+    <p v-if="showParagraph">This is not alwaays visible</p>
+</div>
+
+<div id="app2">
+    <h1>{{title}}</h1>
+    <button @click="onChange">Change something in Vue 1</button>
+    <hello></hello>
+</div>
+
+<div id="app3">
+    
+</div>
+
+<script>
+    // Vue.component('hello', {
+    //     template: '<h1>Hello</h1>'
+    // });
+
+  var vm1 =  new Vue({
+        el: '#app1',
+        data: {
+            title: 'The VueJS Instance',
+            showParagraph: false
+        },
+        methods: {
+            show: function () {
+                this.showParagraph = true;
+                this.updateTitle('The VueJS Instance (Updated)')
+            },
+            updateTitle: function (title) {
+                this.title = title;
+            }
+        },
+        computed: {
+            lowecaseTitle: function () {
+                return this.title.toLowerCase();
+            }
+        },
+        watch: {
+            title: function (value) {
+                alert('Title changed, new value: '+ value);
+            }
+        }
+    });
+    setTimeout(function () {
+        vm1.title = 'Change by timer';
+    }, 3000);
+
+    var vm2 =  new Vue({
+        el: '#app2',
+        data: {
+            title: 'The second Instance'
+        },
+        methods: {
+            onChange: function () {
+                vm1.title = 'Changed!';
+            }
+        },
+        computed: {
+
+        },
+        
+        watch: {
+
+        }
+    });
+
+    var vm3 = new Vue({
+        template: '<h1>Hello!</h1>'
+    })
+    vm3.$mount();
+    document.getElementById('app3').appendChild(vm3.$el);
+</script>

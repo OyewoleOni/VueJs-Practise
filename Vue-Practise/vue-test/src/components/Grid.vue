@@ -23,11 +23,11 @@
                 <td>{{ data.name }}</td>
                 <td>{{ data.statusName }}</td>
                 <td>{{ data.quantity }}</td>
-                <td>
+                <td @click="editEquipment(data)">
                   <font-awesome-icon
                     icon="edit"
                     class="icon-c"
-                    @click="editEquipment(data.id)"
+                    @click="editEquipment(data)"
                   ></font-awesome-icon>
                 </td>
                 <td>
@@ -144,6 +144,7 @@ export default {
       })
     },
     editEquipment (equipment) {
+      console.log(equipment);
       this.$router.push('/create/' + equipment.id)
     },
     showConfirmModal (equipment) {

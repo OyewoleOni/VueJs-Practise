@@ -1,7 +1,8 @@
 <template>
   <div class="auth">
     <p class="title">AUTHENTICATION</p>
-    <button class="google" @click="auth('google')">Google</button>
+    <button class="google" @click="auth('google')"><span style="color: #5050de">G</span><span style="color: #De5246">o</span><span style="color: #F4B400">o</span><span style="color: #5050de">g</span>
+    <span style="color: #0F9D58">l</span><span style="color: #DB4437">e</span> </button>
     <!-- <button class="facebook" @click="auth('facebook')">Facebook</button> -->
   </div>
 </template>

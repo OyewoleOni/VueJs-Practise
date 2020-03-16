@@ -32,7 +32,7 @@
   & .google {
     background-color: #fff;
     color: #5050de;
-    border: .1rem solid #5050de;
+    border: .1rem solid #De5246;
   }
 }
 </style>

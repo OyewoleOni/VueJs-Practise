@@ -9,6 +9,13 @@ import HelloJs from 'hellojs/dist/hello.all.min.js'
 import VueHello from 'vue-hellojs'
 import Grid from './components/Grid.vue'
 import "font-awesome/css/font-awesome.min.css";
+import { required } from 'vee-validate/dist/rules'
+import { ValidationProvider, extend } from 'vee-validate'
+
+extend('required', {
+  ...required,
+  message: 'This field is required'
+})
 
 Vue.config.productionTip = false
 
@@ -28,6 +35,7 @@ export const eventBus = new Vue()
 
 Vue.component('app-header', Header)
 Vue.component('app-Grid', Grid)
+Vue.component('validation-provider', ValidationProvider)
 Vue.component('font-awesome-icon', require('vue-fontawesome-icon/VueFontawesome.vue').default);
 
 new Vue({

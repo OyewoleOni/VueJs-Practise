@@ -1,11 +1,6 @@
 import Vue from 'vue'
 
 export const equipmentEventBus = new Vue({
-//   data () {
-//     return {
-//       error: ''
-//     }
-//   },
   methods: {
     getEquipments (searchQuery) {
       let queryUrl = ''

@@ -9,10 +9,10 @@
                     <p>Are you sure you want to delete?</p>
                     <div class="buttons">
                         <button class="modal-danger-button" @click="$emit('delete')">
-                        Proceed
+                        Confim
                     </button>
                     <button class="modal-default-button" @click="$emit('close')">
-                        Cancel
+                        Decline
                     </button>
                  </div>
                 </slot>

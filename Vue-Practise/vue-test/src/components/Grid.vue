@@ -30,7 +30,7 @@
                     @click="editEquipment(data)"
                   ></font-awesome-icon>
                 </td>
-                <td>
+                <td @click="showConfirmModal(data)">
                   <font-awesome-icon
                     icon="trash"
                     class="icon-c"
@@ -41,6 +41,7 @@
               </tr>
             </tbody>
           </table>
+          <app-confirmation v-if="showModal" @close="showModal = false" @delete="deleteEquipment()"></app-confirmation>
           <div class="pagination" v-if="equipments.length > 0">
             <button
               @click="paginate(currentPage - 1)"
@@ -82,7 +83,8 @@ export default {
       pageCount: 0,
       pages: [],
       currentPage: 1,
-      pageSize: 8
+      pageSize: 8,
+      showModal: false
     }
   },
    created () {
@@ -138,7 +140,7 @@ export default {
   },
   methods: {
     getEquipments (searchQuery) {
-      this.isLoading = true
+      // this.isLoading = true
       return equipmentEventBus.getEquipments(searchQuery).then(res => {
         return res
       })
@@ -148,11 +150,12 @@ export default {
       this.$router.push('/create/' + equipment.id)
     },
     showConfirmModal (equipment) {
+      console.log(equipment)
       this.equipment = equipment
       this.showModal = true
     },
     deleteEquipment () {
-      this.isLoading = true
+      // this.isLoading = true
       equipmentEventBus.deleteEquipment(this.equipment.id)
         // eslint-disable-next-line no-unused-vars
         .then(res => {

@@ -207,7 +207,7 @@ export default {
             this.equipments = res;
             this.isLoading = false;
           }
-          // this.searchQuery = searchQuery;
+          
           console.log("getCurrentPage 2");
           this.paginate(this.currentPage);
         });

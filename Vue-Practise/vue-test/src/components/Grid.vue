@@ -42,7 +42,7 @@
             </tbody>
           </table>
           <app-confirmation v-if="showModal" @close="showModal = false" @delete="deleteEquipment()"></app-confirmation>
-          <div class="pagination" v-if="equipments.length > 0">
+          <div class="justify-content-center mb-3" v-if="equipments.length > 0">
             <button
               @click="paginate(currentPage - 1)"
               :disabled="currentPage === 1"

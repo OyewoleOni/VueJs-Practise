@@ -10,15 +10,23 @@
           type="text"
           style="width: 400px"
           class="form-control"
+          @keyup="searchEquipmentsAuto()"
           v-model="searchQuery"
         />
-        <button class="btn btn-secondary" @click.prevent="searchEquipments()">Search</button>
+        <button class="btn btn-secondary" @click.prevent="searchEquipments()">
+          Search
+        </button>
       </form>
     </div>
-    
+
     <div class="row">
       <div class="container" style="position: relative">
-         <div v-if="isLoading" class="spinner-border" role="status" style="position: absolute; top: 200px">
+        <div
+          v-if="isLoading"
+          class="spinner-border"
+          role="status"
+          style="position: absolute; top: 200px"
+        >
           <span class="sr-only">Loading...</span>
         </div>
         <table class="table table-striped table-hover">
@@ -59,14 +67,19 @@
           @close="showModal = false"
           @delete="deleteEquipment()"
         ></app-confirmation>
-        <div class=" pagination justify-content-center mb-3" v-if="equipments.length > 0">
-          <button class="page-link"
+        <div
+          class=" pagination justify-content-center mb-3"
+          v-if="equipments.length > 0"
+        >
+          <button
+            class="page-link"
             @click="paginate(currentPage - 1)"
             :disabled="currentPage === 1"
           >
             &laquo;
           </button>
-          <button class="page-link"
+          <button
+            class="page-link"
             v-for="(page, i) in pages"
             :key="i"
             @click="paginate(page)"
@@ -74,7 +87,8 @@
           >
             {{ page }}
           </button>
-          <button class="page-link"
+          <button
+            class="page-link"
             @click="paginate(currentPage + 1)"
             :disabled="currentPage === pages.length"
           >
@@ -113,11 +127,11 @@ export default {
       if (typeof res === "string") {
         this.error = res;
         this.equipments = [];
-         this.isLoading = false;
+        this.isLoading = false;
       } else {
         this.error = "";
         this.equipments = res;
-         this.isLoading = false;
+        this.isLoading = false;
       }
       console.log("getCurrentPage 1");
       this.paginate(this.currentPage);
@@ -179,9 +193,30 @@ export default {
       this.equipment = equipment;
       this.showModal = true;
     },
+    searchEquipmentsAuto() {
+      console.log(this.searchQuery.length);
+      if (this.searchQuery.length >= 3) {
+        this.getEquipments(this.searchQuery).then(res => {
+          if (typeof res === "string") {
+            this.error = res;
+            this.equipments = [];
+            this.isLoading = false;
+          } else {
+            console.log(res);
+            this.error = "";
+            this.equipments = res;
+            this.isLoading = false;
+          }
+          // this.searchQuery = searchQuery;
+          console.log("getCurrentPage 2");
+          this.paginate(this.currentPage);
+        });
+      }
+    },
 
     searchEquipments() {
-      console.log(this.searchQuery);
+      console.log(this.searchQuer);
+
       this.getEquipments(this.searchQuery).then(res => {
         if (typeof res === "string") {
           this.error = res;

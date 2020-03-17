@@ -10,7 +10,7 @@
           <validation-provider
             rules="required"
             v-slot="{ errors }"
-            style="width: 80%"
+            style="width: 60%"
           >
             <input
               type="text"
@@ -34,7 +34,7 @@
           <validation-provider
             rules="required"
             v-slot="{ errors }"
-            style="width: 80%"
+            style="width: 60%"
           >
             <input
               type="number"
@@ -55,13 +55,13 @@
           <validation-provider
             rules="required"
             v-slot="{ errors }"
-            style="width: 50%"
+            style="width: 45%"
           >
             <select
               name="types"
               class="form-control"
               v-model="equipment.equipmentTypeName"
-              :class="{ 'error-message': errors[0] }"
+              :class="{ 'text-danger': errors[0] }"
             >
               <option
                 v-for="(type, i) in types"
@@ -80,7 +80,7 @@
         <div
           class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3"
         >
-          <button class="btn btn-primary" @click.prevent="postEquipment()">
+          <button class="btn btn-primary" :disabled="!isComplete" @click.prevent="postEquipment()">
             Submit!
           </button>
           <button class="btn btn-danger ml-2" @click="cancel">Cancel!</button>
@@ -89,6 +89,16 @@
     </div>
   </div>
 </template>
+
+<style scoped>
+  .error-text {
+    color: #b00000;
+    font-size: 1rem;
+    position: absolute;
+    /* left: ;
+    bottom: 0; */
+}
+</style>
 
 <script>
 import { equipmentEventBus } from "../services/equipment";
@@ -198,6 +208,15 @@ export default {
             // this.isLoading = true
           });
       }
+    }
+  },
+  computed: {
+    isComplete () {
+      let res = false
+      if (this.equipment.equipmentName && this.equipment.equipmentTypeName && this.equipment.equipmentQuantity) {
+        res = true
+      }
+      return res
     }
   }
 };

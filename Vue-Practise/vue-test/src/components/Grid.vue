@@ -19,7 +19,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(data, index) in equipments" :key="index">
+              <tr v-for="(data, index) in paginatedEquipments" :key="index">
                 <td>{{ data.name }}</td>
                 <td>{{ data.statusName }}</td>
                 <td>{{ data.quantity }}</td>
@@ -171,8 +171,6 @@ export default {
         })
         .catch(err => {
           console.log(err)
-          this.isLoading = false
-          this.showModal = false
         })
     },
     paginate (pageNum) {
@@ -199,7 +197,6 @@ export default {
       }
       this.pages = newArray
       newArray = []
-      this.isLoading = false
     }
   }
 }
